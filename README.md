@@ -13,7 +13,7 @@
 ### 📱 1. التشغيل على تيرمكس (Termux):
 الصق الأمر التالي في تطبيق Termux للتشغيل المباشر:
 ```bash
-pkg install curl -y && curl -sL https://raw.githubusercontent.com/atomxtols/atom-group-cleaner/main/setup.sh | bash
+pkg install curl -y && curl -sL https://raw.githubusercontent.com/atomxtols/atom-group-cleaner/main/setup.sh -o setup.sh && bash setup.sh
 ```
 
 ### 💻 2. التشغيل على الكمبيوتر (PC):
@@ -30,4 +30,4 @@ python group_cleaner.py
 * **API ID & API Hash:** من موقع `my.telegram.org`.
 * **Bot Token:** من البوت فاذر `@BotFather`.
 * **Group Username / ID:** معرف القروب المستهدف.
-* **رقم العملية:** طرد الأعضاء (1), مسح الرسائل (2), تصفير شامل (3).
+* **رقم العملية:** طرد الأعضاء (1)، مسح الرسائل (2)، تصفير شامل (3).
