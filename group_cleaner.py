@@ -6,6 +6,13 @@ from telethon import TelegramClient, errors
 from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
 
+# Configure stdout encoding to UTF-8 for emoji support on all platforms
+if hasattr(sys.stdout, 'reconfigure'):
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except Exception:
+        pass
+
 def print_banner():
     sys.stdout.write("\033[1;36m")
     print(r"""    ___  ______ ____  ___  ___
