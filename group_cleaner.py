@@ -7,24 +7,22 @@ from telethon.tl.functions.channels import EditBannedRequest
 from telethon.tl.types import ChatBannedRights
 
 def print_banner():
-    banner = """\033[1;36m
-    ___  ______ ____  ___  ___
+    sys.stdout.write("\033[1;36m")
+    print(r"""    ___  ______ ____  ___  ___
    /   |/_  __/ __ \/   |/   |
   / /| | / / / / / / /| / /| |
  / ___ |/ / / /_/ / ___ / ___ |
-/_/  |_/_/  \____/_/  |_/_/  |_|
-\033[1;32m 🥛🛡️ ATOM - Clean Members & Messages 🥛🛡️
-\033[0m"""
-    print(banner)
+/_/  |_/_/  \____/_/  |_/_/  |_|""")
+    print("\033[1;32m 🥛🛡️ ATOM - Clean Members & Messages 🥛🛡️\033[0m")
 
 def play_bomb_animation():
-    banner = """\033[1;36m
-    ___  ______ ____  ___  ___
+    sys.stdout.write("\033[1;36m")
+    banner = r"""    ___  ______ ____  ___  ___
    /   |/_  __/ __ \/   |/   |
   / /| | / / / / / / /| / /| |
  / ___ |/ / / /_/ / ___ / ___ |
-/_/  |_/_/  \____/_/  |_/_/  |_|
-\033[0m"""
+/_/  |_/_/  \____/_/  |_/_/  |_|"""
+    sys.stdout.write("\033[0m")
     frames = [
         # Frame 1: Bomb with lit fuse
         """\033[1;33m           *
@@ -56,7 +54,7 @@ def snake_eat_animation(member_name):
         sys.stdout.write(f"\r\033[1;32m[ 🐍 {spaces}===~> {dots}* ]\033[0m Kicking: {member_name}")
         sys.stdout.flush()
         time.sleep(0.12)
-    sys.stdout.write(f"\r\033[1;32m[ 🐍 {" + '"' + " " * 10 + '"' + "}😋 (Gulp!) ]\033[0m Kicked: {member_name}\n")
+    sys.stdout.write(f"\r\033[1;32m[ 🐍 {' ' * 10}😋 (Gulp!) ]\033[0m Kicked: {member_name}\n")
     sys.stdout.flush()
 
 def snake_delete_animation(msg_id):
@@ -66,7 +64,7 @@ def snake_delete_animation(msg_id):
         sys.stdout.write(f"\r\033[1;33m[ 🚜💨 {spaces}══💣   [Msg ID: {msg_id}] ]\033[0m Deleting...")
         sys.stdout.flush()
         time.sleep(0.1)
-    sys.stdout.write(f"\r\033[1;33m[ 🚜💨 {" + '"' + " " * 12 + '"' + "}💥 (Boom!)               ]\033[0m Deleted Msg: {msg_id}\n")
+    sys.stdout.write(f"\r\033[1;33m[ 🚜💨 {' ' * 12}💥 (Boom!)               ]\033[0m Deleted Msg: {msg_id}\n")
     sys.stdout.flush()
 
 async def main():
@@ -147,7 +145,7 @@ async def clean_members(client, group):
             
             try:
                 # Play inline animation
-                snake_eat_animation(f\"{user.first_name or ''} {user.last_name or ''} ({user.id})\")
+                snake_eat_animation(f"{user.first_name or ''} {user.last_name or ''} ({user.id})")
                 
                 await client(EditBannedRequest(group, user.id, ban_rights))
                 await client(EditBannedRequest(group, user.id, ChatBannedRights(until_date=None, view_messages=False)))
@@ -156,15 +154,15 @@ async def clean_members(client, group):
                 await asyncio.sleep(1.0)
                 
             except errors.FloodWaitError as e:
-                print(f\"\n\033[1;31m⚠️ Rate limit hit! Waiting {e.seconds} seconds...\033[0m\")
+                print(f"\n\033[1;31m⚠️ Rate limit hit! Waiting {e.seconds} seconds...\033[0m")
                 await asyncio.sleep(e.seconds)
             except errors.UserAdminInvalidError:
                 pass
             except Exception as e:
-                print(f\"\n❌ Failed to kick user {user.id}: {e}\")
+                print(f"\n❌ Failed to kick user {user.id}: {e}")
                 
     except Exception as e:
-        print(f\"\n❌ Error fetching group members: {e}\")
+        print(f"\n❌ Error fetching group members: {e}")
 
 async def clean_messages(client, group):
     print("\n\033[1;33m🎬 Starting message purge:\033[0m\n")
@@ -177,15 +175,15 @@ async def clean_messages(client, group):
                 count += 1
                 await asyncio.sleep(0.5)
             except errors.FloodWaitError as e:
-                print(f\"\n\033[1;31m⚠️ Rate limit hit! Waiting {e.seconds} seconds...\033[0m\")
+                print(f"\n\033[1;31m⚠️ Rate limit hit! Waiting {e.seconds} seconds...\033[0m")
                 await asyncio.sleep(e.seconds)
             except Exception as e:
                 pass
     except Exception as e:
-        print(f\"\n❌ Error fetching group messages: {e}\")
+        print(f"\n❌ Error fetching group messages: {e}")
 
-if __name__ == \"__main__\":
+if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
-        print(\"\n\033[1;31m🔌 Script stopped by user.\033[0m\")
+        print("\n\033[1;31m🔌 Script stopped by user.\033[0m")
